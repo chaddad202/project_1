@@ -34,16 +34,16 @@ Route::group(
         Route::get('/category_index', [CategoryController::class, 'index']);
         Route::get('/category_show/{category_id}', [CategoryController::class, 'show']);
         Route::get('/service_index/{category_id}', [ServiceController::class, 'index']);
-        Route::get('/service_show', [ServiceController::class, 'show']);
+        Route::get('/service_show/{id}', [ServiceController::class, 'show']);
         Route::get('/contact_index', [ContactController::class, 'index']);
         Route::get('/contact_show/{id}', [ContactController::class, 'show']);
-        Route::get('/slide_show_index', [SlideShowController::class, 'index']);
-        Route::get('/slide_show_show/{id}', [SlideShowController::class, 'show']);
         Route::get('/status_show', [StatusController::class, 'show']);
     }
 );
 
 
+Route::get('/slide_show_index', [SlideShowController::class, 'index']);
+Route::get('/slide_show_show/{id}', [SlideShowController::class, 'show']);
 Route::get('/announcement_show_update/{id}', [AnnouncementController::class, 'show_for_update']);
 Route::get('/category_show_update/{category_id}', [CategoryController::class, 'show_for_update']);
 Route::get('/contact_show_update/{id}', [ContactController::class, 'show_for_update']);
