@@ -24,7 +24,9 @@ class ContactUpdateRequest extends FormRequest
         return [
             'name_en' => 'string',
             'name_ar' => 'string',
-            'icon' => 'file'
+            'icon' => 'file',
+            'link' => 'string'
+
         ];
     }
 }

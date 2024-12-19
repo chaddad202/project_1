@@ -19,6 +19,8 @@ class ContactUpdateResource extends JsonResource
             'icon' => url('storage/' . str_replace('public/', '', $this->icon)),
             'name_en' => $this->name_en,
             'name_ar' => $this->name_ar,
+            'link' => $this->link,
+
         ];
     }
 }

@@ -19,11 +19,20 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-        'name'=> "required|string",
-        'password'=>'required|string'
+            'name' => 'required|string|max:255|alpha_num', 
+            'password' => 'required|string|min:6|max:255',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'The username field is required.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 6 characters.',
         ];
     }
 }

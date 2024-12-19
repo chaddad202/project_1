@@ -54,13 +54,20 @@ class StatusController extends Controller
      */
     public function update()
     {
-        $status = Status::where('id', 1)->first();
+        $status = Status::first(); // الحصول على أول حالة
         if ($status) {
             $status->open_or_not = !$status->open_or_not;
             $status->save();
-            return $this->returnSuccessMessage("updated successfully");
+
+            return response()->json([
+                'success' => true,
+                'open_or_not' => $status->open_or_not
+            ]);
         }
+
+        return response()->json(['success' => false], 400);
     }
+
     /**
      * Remove the specified resource from storage.
      */

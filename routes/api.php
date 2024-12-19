@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/slide_show_update/{id}', [SlideShowController::class, 'update']);
     Route::delete('/slide_show_destroy/{id}', [SlideShowController::class, 'destroy']);
     Route::post('/category_store', [CategoryController::class, 'store']);
-    Route::post('/category_update/{id}', [CategoryController::class, 'update']);
+    Route::put('/category_update/{id}', [CategoryController::class, 'update']);
     Route::delete('/category_destroy/{id}', [CategoryController::class, 'destroy']);
     Route::post('/announcement_store', [AnnouncementController::class, 'store']);
     Route::post('/announcement_update/{id}', [AnnouncementController::class, 'update']);

@@ -48,7 +48,7 @@ class AnnouncementController extends Controller
             'description_en' => $request->description_en,
             'description_ar' => $request->description_ar
         ]);
-        return $this->returnSuccessMessage("created successfully");
+        return redirect()->route('ads.page')->with('success', 'Ads created successfully');
     }
 
     /**
@@ -70,8 +70,9 @@ class AnnouncementController extends Controller
      */
     public function edit(string $id)
     {
-        //
-    }
+        $ads = Announcement::findOrFail($id);
+
+        return view('edit_ads', compact('ads'));    }
 
     /**
      * Update the specified resource in storage.
@@ -91,7 +92,7 @@ class AnnouncementController extends Controller
                 'photo' => $photo
             ]);
         }
-        return $this->returnSuccessMessage(' updated Successfully ');
+        return redirect()->route('ads.page')->with('success', 'Ads updated successfully');
     }
 
     /**
@@ -102,6 +103,6 @@ class AnnouncementController extends Controller
         $announcement = Announcement::findOrFail($id);
         Storage::delete($announcement->photo);
         $announcement->delete();
-        return $this->returnSuccessMessage(' deleted Successfully ');
+        return redirect()->route('ads.page')->with('success', 'Ads deletd successfully');
     }
 }

@@ -1,0 +1,334 @@
+/* Main CSS Here */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+:root {
+    --background-color1: #fafaff;
+    --background-color2: #ffffff;
+    --background-color3: #ededed;
+    --background-color4: #cad7fda4;
+    --primary-color: #0077b6;
+    --secondary-color: #00b4d8;
+    --Border-color: #0077b6;
+    --one-use-color: #00b4d8;
+    --two-use-color: #00b4d8;
+}
+body {
+    background-color: var(--background-color4);
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    height: 70px;
+    width: 100vw;
+    padding: 0 30px;
+    background-color: var(--background-color1);
+    position: fixed;
+    z-index: 100;
+    box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.301);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.icn {
+    height: 40px;
+}
+.menuicn {
+    cursor: pointer;
+}
+
+.searchbar,
+.message,
+.logosec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logosec {
+    gap: 10px;
+}
+
+.main-container {
+    display: flex;
+    width: 100vw;
+    position: relative;
+    top: 70px;
+    z-index: 1;
+}
+
+.sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: 100vh;
+    width: 78px;
+    background: var(--primary-color);
+    padding: 6px 14px;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active {
+
+    width: 240px;
+}
+
+.sidebar.active #btn {
+    left: 90%;
+}
+
+.sidebar ul {
+    margin-top: 20px;
+}
+
+.sidebar ul li {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    list-style: none;
+    margin: 0 5px;
+    line-height: 50px;
+}
+
+.sidebar ul li .tooltip {
+    position: absolute;
+    left: 122px;
+    top: 0%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    line-height: 35px;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
+
+.current {
+    background-color: white;
+    color: #11101d;
+}
+.current > .links_name {
+    color: #11101d;
+}
+.current > i {
+    color: #11101d;
+}
+
+.sidebar ul li input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 12px;
+    outline: none;
+    border: none;
+    background: #1d1b31;
+    padding-left: 50px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.sidebar ul li .bx-search-alt {
+    position: absolute;
+    z-index: 99;
+    color: #fff;
+    font-size: 22px;
+    transition: all 0.5s ease;
+}
+
+.sidebar ul li .bx-search-alt:hover {
+    background: #fff;
+    color: #1d1b31;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.sidebar ul li a:hover {
+    color: var(--primary-color);
+    background: #fff;
+}
+
+.sidebar ul li i {
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.sidebar .links_name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.active .links_name {
+
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar .profile_content {
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar .profile_content .profile {
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background: #1d1b31;
+    transition: all 0.5s ease;
+}
+
+.sidebar .profile_content .profile a {
+    color: #fff;
+}
+
+.sidebar .profile_content .profile .profile_details {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.sidebar.active .profile .profile_details {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+    overflow: scroll;
+    background-color: white;
+    /* background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)) , url(../images/back.jpg); */
+    background-position: center;
+    background-size: cover;
+}
+
+.sidebar.active ~ .home_content {
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+.home_content {
+    padding-top: 75px;
+    padding-left: 190px;
+    padding-right: 40px;
+}
+
+.home_content .data_table {
+    text-align: center;
+    margin: 10px;
+}
+
+.home_content .button {
+    border: none;
+    color: white;
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #11101d;
+    border-radius: 10px;
+}
+
+.home_content .button-div {
+    padding-bottom: 30px;
+}
+
+.home_content .data_table .delete-button-table {
+    background-color: red;
+    opacity: 1;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.home_content .data_table .delete-button-table:hover {
+    background-color: red;
+    opacity: 0.5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.home_content .data_table .edit-button-table {
+    background-color: green;
+    opacity: 1;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.home_content .data_table .edit-button-table:hover {
+    background-color: green;
+    opacity: 0.5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}

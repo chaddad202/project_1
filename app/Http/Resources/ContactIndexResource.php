@@ -19,6 +19,7 @@ class ContactIndexResource extends JsonResource
         return
             [
                 'id' => $this->id,
+                'link'=>$this->link,
                 'icon' => url('storage/' . str_replace('public/', '', $this->icon)),
                 'name' => $locale === 'ar' ? $this->name_ar : $this->name_en,
             ];

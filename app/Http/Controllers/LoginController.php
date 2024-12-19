@@ -13,27 +13,35 @@ class LoginController extends Controller
     use GeneralTrait;
     public function login(LoginRequest $request)
     {
-
-
         $user = User::where('name', $request['name'])->first();
+
         if (!$user) {
-            return response([
-                'message' => 'name field incorrect'
-            ], 401);
-        } else if (!Hash::check($request['password'], $user->password)) {
-            return response([
-                'message' => 'password field incorrect'
-            ], 401);
+            return redirect()->route('login.page')->with('error', 'Invalid username');
         }
 
+        if (!Hash::check($request['password'], $user->password)) {
+            return redirect()->route('login.page')->with('error', 'Invalid password');
+        }
+
+        // إنشاء التوكن
         $token = $user->createToken('myapptoken')->plainTextToken;
-        return response()->json([
-            'message' => 'Login successfully',
-            'token' => $token
-        ], 200);    }
-    public function logout()
+
+        // تخزين التوكن في الجلسة
+        session(['auth_token' => $token]);
+
+        return redirect()->route('category.page')->with('success', 'Login successful');
+    }
+
+    public function logout(Request $request)
     {
-        auth()->user()->currentAccessToken()->delete();
-        return $this->returnSuccessMessage(" logout successfully");
+        $user = $request->user();
+
+        if ($user) {
+            $user->tokens()->delete(); // حذف جميع التوكنات
+        }
+
+        session()->forget('auth_token'); // حذف التوكن من الجلسة
+
+        return redirect()->route('login.page')->with('success', 'Logged out successfully');
     }
 }

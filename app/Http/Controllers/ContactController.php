@@ -40,9 +40,10 @@ class ContactController extends Controller
         Contact::create([
             'name_en' => $request->name_en,
             'name_ar' => $request->name_ar,
+            'link'=>$request->link,
             'icon' => $icon
         ]);
-        return $this->returnSuccessMessage("created successfully");
+        return redirect()->route('contact.page')->with('success', 'Contact created successfully');
     }
 
     /**
@@ -63,7 +64,9 @@ class ContactController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $contact = Contact::findOrFail($id);
+
+        return view('edit_contact', compact('contact'));
     }
 
     /**
@@ -80,13 +83,13 @@ class ContactController extends Controller
         $icon = '';
         $contact->update($request->all());
         if ($request->hasFile('icon')) {
-            Storage::delete($contact->photo);
+            Storage::delete($contact->icon);
             $icon  = $request->file('icon')->store('public/images');
             $contact->update([
                 'icon' => $icon
             ]);
         }
-        return $this->returnSuccessMessage(' updated Successfully ');
+        return redirect()->route('contact.page')->with('success', 'Contact updated successfully');
     }
 
     /**
@@ -97,6 +100,6 @@ class ContactController extends Controller
         $contact = Contact::findOrFail($id);
         Storage::delete($contact->icon);
         $contact->delete();
-        return $this->returnSuccessMessage(' deleted Successfully ');
+        return redirect()->route('contact.page')->with('success', 'Contact deleted successfully');
     }
 }

@@ -39,7 +39,7 @@ class SlideShowController extends Controller
         SlideShow::create([
             'photo' => $photo,
         ]);
-        return $this->returnSuccessMessage("created successfully");
+        return redirect()->route('slideShow.page')->with('success', 'Slide Show created successfully');
     }
 
     /**
@@ -56,7 +56,9 @@ class SlideShowController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $slideShow = SlideShow::findOrFail($id);
+
+        return view('edit_slideShow', compact('slideShow'));  //
     }
 
     /**
@@ -73,7 +75,7 @@ class SlideShowController extends Controller
                 'photo' => $photo
             ]);
         }
-        return $this->returnSuccessMessage(' updated Successfully ');
+        return redirect()->route('slideShow.page')->with('success', 'Slide Show updated successfully');
     }
 
     /**
@@ -84,6 +86,6 @@ class SlideShowController extends Controller
         $slide = SlideShow::findOrFail($id);
         Storage::delete($slide->photo);
         $slide->delete();
-        return $this->returnSuccessMessage(' deleted Successfully ');
+        return redirect()->route('slideShow.page')->with('success', 'Slide Show deleted successfully');
     }
 }

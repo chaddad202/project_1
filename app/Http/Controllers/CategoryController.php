@@ -49,7 +49,7 @@ class CategoryController extends Controller
             'description_en' => $request->description_en,
             'description_ar' => $request->description_ar,
         ]);
-        return $this->returnSuccessMessage("created successfully");
+        return redirect()->route('category.page')->with('success', 'Category created successfully');
     }
 
     /**
@@ -70,7 +70,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        return view('edit_category', compact('category'));
     }
 
     /**
@@ -93,7 +95,7 @@ class CategoryController extends Controller
                 'photo' => $photo
             ]);
         }
-        return $this->returnSuccessMessage(' updated Successfully ');
+        return redirect()->route('category.page')->with('success', 'Category updated successfully');
     }
 
     /**
@@ -104,6 +106,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         Storage::delete($category->photo);
         $category->delete();
-        return $this->returnSuccessMessage(' deleted Successfully ');
+        return redirect()->route('category.page')->with('success', 'Category deleted successfully');
     }
 }
